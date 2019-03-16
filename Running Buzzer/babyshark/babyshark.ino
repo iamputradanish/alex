@@ -4,82 +4,98 @@
 #define thirdnote (535/3)
 #define eigthnote (quarternote/2)
 
+int notes[12]={2093, 2217, 2349, 2489, 2637, 2793, 2960, 3136, 3322, 3520, 3729, 3951};
+  //             C7  , C#7 , D7  , D#7 , E7  , F7  , F#7 , G7  , G#7 , A7  , A#7 , B7
+
 void setup() {
   pinMode(12,OUTPUT);
 }
 
-void babyshark(){
-  tone(12,294); //D
-  delay(eigthnote);
+void babysharkdoo(){
+  //D-E G GG  GG  GG
+  tone(12,notes[2]); //D
+  delay(quarternote);
   noTone(12);
   delay(tempo);
   
-  tone(12,330); //E
-  delay(eigthnote);
+  tone(12,notes[4]); //E
+  delay(quarternote);
   noTone(12);
   delay(tempo);
 
-  tone(12,392); //G
+  
+
+  tone(12,notes[7]); //G
+  delay(eigthnote);
+  noTone(12);
+  delay(halfnote);
+
+
+  
+  tone(12,notes[7]); //G
   delay(eigthnote);
   noTone(12);
   delay(halfnote);
   
-  tone(12,392); //G
-  delay(eigthnote);
-  noTone(12);
-  delay(halfnote);
-  
-  tone(12,392); //G
-  delay(eigthnote);
-  noTone(12);
-  delay(thirdnote);
-  
-  tone(12,392); //G
-  delay(eigthnote);
-  noTone(12);
-  delay(quarternote);
-  
-  tone(12,392); //G
-  delay(quarternote);
-  noTone(12);
-  delay(quarternote);
-  
-  tone(12,392); //G
+  tone(12,notes[7]); //G
   delay(eigthnote);
   noTone(12);
   delay(thirdnote);
 
+
   
+  
+  tone(12,notes[7]); //G
+  delay(eigthnote);
+  noTone(12);
+  delay(quarternote);
+  
+  tone(12,notes[7]); //G
+  delay(quarternote);
+  noTone(12);
+  delay(quarternote);
+
+
+  
+  
+  tone(12,notes[7]); //G
+  delay(eigthnote);
+  noTone(12);
+  delay(thirdnote);
+
+  tone(12,notes[7]); //G
+  delay(eigthnote);
+  noTone(12);
+  delay(thirdnote);
 
 }
 
-void babyshark1(){
-  tone(12,392); //G
+void babyshark(){
+  tone(12,notes[7]); //G
   delay(eigthnote);
   noTone(12);
   delay(halfnote);
   
-  tone(12,392); //G
+  tone(12,notes[7]); //G
   delay(eigthnote);
   noTone(12);
   delay(halfnote);
 
-  tone(12,392); //F#
+  
+
+  tone(12,notes[6]); //F#
   delay(eigthnote);
   noTone(12);
+  delay(tempo);
   delay(tempo);
 }
 
 void loop() {
+  babysharkdoo();
+  delay(quarternote);
+  babysharkdoo();
+  delay(quarternote);
+  babysharkdoo();
   babyshark();
-  babyshark();
-  babyshark();
-  babyshark1();
 
-  //int notes[10]={261, 277, 294, 311, 330, 349, 370, 392, 415, 440};
-  //            mid C  C#   D    D#   E    F    F#   G    G#   A
-
-  //for(int i = 0; i < 10; i++){
-  //  tone(12, notes[i]); //accesses spots on the array.
-  //  delay(1000);
 }
