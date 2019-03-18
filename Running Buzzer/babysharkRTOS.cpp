@@ -3,127 +3,105 @@
 #include <FreeRTOS.h>
 #include <task.h>
 
+#define STACK_SIZE 200
+
 #define TEMPO 400
-#define HALF (TEMPO/2)
-#define QUARTER (HALF/2)
-#define THIRD (TEMPO/3)
-#define EIGTH (QUARTER/2)
 #define DNOTE 2349
 #define ENOTE 2637
 #define GNOTE 3136
 #define FSNOTE 2960
 
-void setup() {
-  pinMode(12,OUTPUT);
-}
+const TickType_t xTempo = TEMPO portTICK_PERIOD_MS;
+const TickType_t xHalf  = TEMPO/2;
+const TickType_t xQuarter = HALF/2;
+const TickType_t xThird = TEMPO/3;
+const TickType_t xEigth = QUARTER/2;
+
 
 void babysharkdoo(){
   //D-E G GG  GG  GG
-  tone(12,notes[2]); //D
-  delay(halfnote);
-  
-  tone(12,notes[4]); //E
-  delay(halfnote);
+  tone(12,DNOTE); //D
+  vTaskDelay(xHALF);
+  tone(12,ENOTE); //E
+  vTaskDelay(xHALF);
   noTone(12);
-  delay(quarternote);
+  vTaskDelay(xQUARTER);
 
-  tone(12,notes[7]); //G
-  delay(eigthnote);
+  tone(12,GNOTE); //G
+  vTaskDelay(xEIGTH);
   noTone(12);
-  delay(halfnote);
+  vTaskDelay(xHALF);
 
 
-  tone(12,notes[7]); //G
-  delay(eigthnote);
+  tone(12,GNOTE); //G
+  vTaskDelay(xEIGTH);
   noTone(12);
-  delay(halfnote);
-  
-  tone(12,notes[7]); //G
-  delay(eigthnote);
+  vTaskDelay(xHALF);
+  tone(12,GNOTE); //G
+  vTaskDelay(xEIGTH);
   noTone(12);
-  delay(thirdnote);
-
-
+  vTaskDelay(xTHIRD);
   
   
-  tone(12,notes[7]); //G
-  delay(eigthnote);
+  tone(12,GNOTE); //G
+  vTaskDelay(xEIGTH);
   noTone(12);
-  delay(quarternote);
-  
-  tone(12,notes[7]); //G
-  delay(quarternote);
+  vTaskDelay(xQUARTER);
+  tone(12,GNOTE); //G
+  vTaskDelay(xQUARTER);
   noTone(12);
-  delay(quarternote);
-
+  vTaskDelay(xQUARTER);
 
   
-  
-  tone(12,notes[7]); //G
-  delay(eigthnote);
+  tone(12,GNOTE); //G
+  vTaskDelay(xEIGTH);
   noTone(12);
-  delay(thirdnote);
-
-  tone(12,notes[7]); //G
-  delay(eigthnote);
+  vTaskDelay(xTHIRD);
+  tone(12,GNOTE); //G
+  vTaskDelay(xEIGTH);
   noTone(12);
-  delay(thirdnote);
+  vTaskDelay(xTHIRD);
 
 }
 
 void babyshark(){
-  tone(12,notes[7]); //G
-  delay(eigthnote);
+  tone(12,GNOTE); //G
+  vTaskDelay(xEIGTH);
   noTone(12);
-  delay(halfnote);
-  
-  tone(12,notes[7]); //G
-  delay(eigthnote);
+  vTaskDelay(xHALF); 
+  tone(12,GNOTE); //G
+  vTaskDelay(xEIGTH);
   noTone(12);
-  delay(halfnote);
+  vTaskDelay(xHALF);
 
-  
 
-  tone(12,notes[6]); //F#
-  delay(eigthnote);
+  tone(12,FSNOTE); //F#
+  vTaskDelay(xEIGTH);
   noTone(12);
-  delay(tempo);
-  delay(tempo);
+  vTaskDelay(xTEMPO);
+  vTaskDelay(xTEMPO);
 }
 
-void loop() {
-  babysharkdoo();
-  delay(quarternote);
-  babysharkdoo();
-  delay(quarternote);
-  babysharkdoo();
-  babyshark();
-
-}
-
-void task1(void *p)
+void vTask1(void *p)
 {
-	for (TickType_t xFrequency = 0; xFrequency <= PERIOD_50; xFrequency++) {
-		TickType_t xLastWakeTime;
-
-		xLastWakeTime = xTaskGetTickCount();
-		digitalWrite(LED_PIN, HIGH);
-		vTaskDelayUntil(&xLastWakeTime, xFrequency);
-
-		xLastWakeTime = xTaskGetTickCount();
-		digitalWrite(LED_PIN, LOW);
-		vTaskDelayUntil(&xLastWakeTime, PERIOD_50 - xFrequency);
+	for (;;) {
+		babysharkdoo();
+		vTaskDelay(xQUARTER);
+		babysharkdoo();
+		vTaskDelay(xQUARTER);
+		babysharkdoo();
+		babyshark();
 	}
 }
 
-void setup()
+void setup() 
 {
-	pinMode(LED_PIN, OUTPUT);
+  pinMode(12,OUTPUT);
 }
 
 void loop() {
-	xTaskCreate(task1, 			// Pointer to the task entry function
-				"Task1", 		// Task name
+	xTaskCreate(vTask1, 			// Pointer to the task entry function
+				"RunningBuzzer", // Task name
 				STACK_SIZE, 	// Stack size
 				NULL, 			// Pointer that will be used as parameter
 				1, 				// Task priority
