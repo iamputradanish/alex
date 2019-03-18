@@ -1,4 +1,4 @@
-#define tempo 535
+#define tempo 400
 #define halfnote (tempo/2)
 #define quarternote (halfnote/2)
 #define thirdnote (535/3)
@@ -14,16 +14,12 @@ void setup() {
 void babysharkdoo(){
   //D-E G GG  GG  GG
   tone(12,notes[2]); //D
-  delay(quarternote);
-  noTone(12);
-  delay(tempo);
+  delay(halfnote);
   
   tone(12,notes[4]); //E
-  delay(quarternote);
+  delay(halfnote);
   noTone(12);
-  delay(tempo);
-
-  
+  delay(quarternote);
 
   tone(12,notes[7]); //G
   delay(eigthnote);
@@ -31,7 +27,6 @@ void babysharkdoo(){
   delay(halfnote);
 
 
-  
   tone(12,notes[7]); //G
   delay(eigthnote);
   noTone(12);
