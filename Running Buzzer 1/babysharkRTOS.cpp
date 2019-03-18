@@ -20,98 +20,76 @@ const TickType_t xEigth = ((QUARTER/2)/portTICK_PERIOD_MS);
 TickType_t = xLastWakeTime;
 
 void babysharkdoo(){
-  //D-E G GG  GG  GG
   xLastWakeTime = xTaskGetTickCount();
+  //D-E G GG  GG  GG
   tone(12,DNOTE); //D
   vTaskDelayUntil(&xLastWakeTime, xHalf);
-  xLastWakeTime = xTaskGetTickCount();
   tone(12,ENOTE); //E
   vTaskDelayUntil(&xLastWakeTime, xHalf);
-  xLastWakeTime = xTaskGetTickCount();
   noTone(12);
   vTaskDelayUntil(&xLastWakeTime, xQuarter);
   
-  xLastWakeTime = xTaskGetTickCount();
   tone(12,GNOTE); //G
   vTaskDelayUntil(&xLastWakeTime, xEigth);
-  xLastWakeTime = xTaskGetTickCount();
   noTone(12);
   vTaskDelayUntil(&xLastWakeTime, xHalf);
 
-  xLastWakeTime = xTaskGetTickCount();
   tone(12,GNOTE); //G
   vTaskDelayUntil(&xLastWakeTime, xEigth);
-  xLastWakeTime = xTaskGetTickCount();
   noTone(12);
   vTaskDelayUntil(&xLastWakeTime, xHalf);
-  xLastWakeTime = xTaskGetTickCount();
   tone(12,GNOTE); //G
   vTaskDelayUntil(&xLastWakeTime, xEigth);
-  xLastWakeTime = xTaskGetTickCount();
   noTone(12);
   vTaskDelayUntil(&xLastWakeTime, xThird);
   
-  xLastWakeTime = xTaskGetTickCount();
   tone(12,GNOTE); //G
   vTaskDelayUntil(&xLastWakeTime, xEigth);
-  xLastWakeTime = xTaskGetTickCount();
   noTone(12);
   vTaskDelayUntil(&xLastWakeTime, xQuarter);
-  xLastWakeTime = xTaskGetTickCount();
   tone(12,GNOTE); //G
   vTaskDelayUntil(&xLastWakeTime, xQuarter);
-  xLastWakeTime = xTaskGetTickCount();
   noTone(12);
   vTaskDelayUntil(&xLastWakeTime, xQuarter);
 
-  xLastWakeTime = xTaskGetTickCount();
   tone(12,GNOTE); //G
   vTaskDelayUntil(&xLastWakeTime, xEigth);
-  xLastWakeTime = xTaskGetTickCount();
   noTone(12);
   vTaskDelayUntil(&xLastWakeTime, xThird);
-  xLastWakeTime = xTaskGetTickCount();
   tone(12,GNOTE); //G
   vTaskDelayUntil(&xLastWakeTime, xEigth);
-  xLastWakeTime = xTaskGetTickCount();
   noTone(12);
   vTaskDelayUntil(&xLastWakeTime, xThird);
 
 }
 
 void babyshark(){
-	
   xLastWakeTime = xTaskGetTickCount();
+  
   tone(12,GNOTE); //G
   vTaskDelayUntil(&xLastWakeTime, xEigth);
-  xLastWakeTime = xTaskGetTickCount();
   noTone(12);
   vTaskDelayUntil(&xLastWakeTime, xHalf); 
-  xLastWakeTime = xTaskGetTickCount();
   tone(12,GNOTE); //G
   vTaskDelayUntil(&xLastWakeTime, xEigth);
-  xLastWakeTime = xTaskGetTickCount();
   noTone(12);
   vTaskDelayUntil(&xLastWakeTime, xHalf);
-
-  xLastWakeTime = xTaskGetTickCount();
+  
   tone(12,FSNOTE); //F#
   vTaskDelayUntil(&xLastWakeTime, xEigth);
-  xLastWakeTime = xTaskGetTickCount();
   noTone(12);
   vTaskDelayUntil(&xLastWakeTime, xTempo);
-  xLastWakeTime = xTaskGetTickCount();
   vTaskDelayUntil(&xLastWakeTime, xTempo);
 }
 
 void vTask1(void *p)
 {
+	
 	for (;;) {
-		babysharkdoo();
 		xLastWakeTime = xTaskGetTickCount();
+		babysharkdoo();
 		vTaskDelayUntil(&xLastWakeTime, xQUARTER);
 		babysharkdoo();
-		xLastWakeTime = xTaskGetTickCount();
 		vTaskDelayUntil(&xLastWakeTime, xQUARTER);
 		babysharkdoo();
 		babyshark();

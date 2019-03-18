@@ -19,8 +19,10 @@ const TickType_t xHalf  = ((TEMPO/2)/portTICK_PERIOD_MS);
 const TickType_t xQuarter = ((HALF/2)/portTICK_PERIOD_MS);
 const TickType_t xEigth = ((QUARTER/2)/portTICK_PERIOD_MS);
 
+TickType_t = xLastWakeTime;
 
 void theboywholived(){
+	xLastWakeTime = xTaskGetTickCount();
 //
 //  B E G F# E B A F#
 //  E G F# Eb E B
@@ -33,57 +35,57 @@ void theboywholived(){
 
   //B E G F E B A F
   noTone(12);
-  vTaskDelay(xTempo);
-  vTaskDelay(xTempo);
+  vTaskDelayUntil(&xLastWakeTime, xTempo);
+  vTaskDelayUntil(&xLastWakeTime, xTempo);
   tone(12,B6NOTE); //B
-  vTaskDelay(xTempo);
+  vTaskDelayUntil(&xLastWakeTime, xTempo);
   
   
   tone(12,ENOTE); //E
-  vTaskDelay(xTempo);
-  vTaskDelay(xHalf);
+  vTaskDelayUntil(&xLastWakeTime, xTempo);
+  vTaskDelayUntil(&xLastWakeTime, xHalf);
   tone(12,GNOTE); //G
-  vTaskDelay(xHalf);
+  vTaskDelayUntil(&xLastWakeTime, xHalf);
   tone(12,FSNOTE); //F#
-  vTaskDelay(xTempo);
+  vTaskDelayUntil(&xLastWakeTime, xTempo);
   
   tone(12,ENOTE); //E
-  vTaskDelay(xTempo);
-  vTaskDelay(xTempo);
+  vTaskDelayUntil(&xLastWakeTime, xTempo);
+  vTaskDelayUntil(&xLastWakeTime, xTempo);
   
   tone(12,B7NOTE); //B
-  vTaskDelay(xTempo);
+  vTaskDelayUntil(&xLastWakeTime, xTempo);
   
   tone(12,ANOTE); //A
-  vTaskDelay(xTempo);
-  vTaskDelay(xTempo);
-  vTaskDelay(xTempo);
+  vTaskDelayUntil(&xLastWakeTime, xTempo);
+  vTaskDelayUntil(&xLastWakeTime, xTempo);
+  vTaskDelayUntil(&xLastWakeTime, xTempo);
 
   tone(12,FSNOTE); //F#
-  vTaskDelay(xTempo);
-  vTaskDelay(xTempo);
+  vTaskDelayUntil(&xLastWakeTime, xTempo);
+  vTaskDelayUntil(&xLastWakeTime, xTempo);
   noTone(12);
-  vTaskDelay(xTempo);
+  vTaskDelayUntil(&xLastWakeTime, xTempo);
   
 //  //E G F# Eb E B
 //
 //  tone(12,ENOTE); //E
-//  vTaskDelay(xTempo);
-//  vTaskDelay(XHalf);
+//  vTaskDelayUntil(&xLastWakeTime, xTempo);
+//  vTaskDelayUntil(&xLastWakeTime, XHalf);
 //  tone(12,GNOTE); //G
-//  vTaskDelay(xHalf);
+//  vTaskDelayUntil(&xLastWakeTime, xHalf);
 //  tone(12,FSNOTE); //F#
-//  vTaskDelay(xTempo);
+//  vTaskDelayUntil(&xLastWakeTime, xTempo);
 //
 //  tone(12,2489); //D#
-//  vTaskDelay(xTempo);
-//  vTaskDelay(xTempo);
+//  vTaskDelayUntil(&xLastWakeTime, xTempo);
+//  vTaskDelayUntil(&xLastWakeTime, xTempo);
 //  tone(12,2489); //Eb/D#
-//  vTaskDelay(xTempo);
+//  vTaskDelayUntil(&xLastWakeTime, xTempo);
 //  tone(12,B7NOTE); //B
-//  vTaskDelay(xTempo);
-//  vTaskDelay(xTempo);
-//  vTaskDelay(xTempo);
+//  vTaskDelayUntil(&xLastWakeTime, xTempo);
+//  vTaskDelayUntil(&xLastWakeTime, xTempo);
+//  vTaskDelayUntil(&xLastWakeTime, xTempo);
 //  noTone(12);
   
 }
@@ -91,8 +93,9 @@ void theboywholived(){
 void vTask2(void *p)
 {
 	for (;;) {
+		xLastWakeTime = xTaskGetTickCount();
 		theboywholived();
-		vTaskDelay(100000);
+		vTaskDelayUntil(&xLastWakeTime, 100000);
 	}
 }
 
