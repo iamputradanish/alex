@@ -109,7 +109,7 @@ void loop() {
 				"EndBuzzer", // Task name
 				STACK_SIZE, 	// Stack size
 				NULL, 			// Pointer that will be used as parameter
-				1, 				// Task priority
+				2, 				// Task priority
 				NULL); 			// Used to pass back a handle by which the created task can be referenced.
 	vTaskStartScheduler();
 }
