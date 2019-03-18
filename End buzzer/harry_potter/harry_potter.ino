@@ -1,8 +1,13 @@
-#define tempo 535
-#define halfnote (tempo/2)
-#define quarternote (halfnote/2)
-#define thirdnote (535/3)
-#define eigthnote (quarternote/2)
+#define TEMPO 400
+#define DNOTE 2349
+#define ENOTE 2637
+#define GNOTE 3136
+#define FSNOTE 2960
+
+int HALF = (TEMPO/2)
+int QUARTER = (HALF/2)
+int THIRD = (TEMPO/3)
+int EIGTH = (QUARTER/2)
 
 int notes[13]={1976, 2093, 2217, 2349, 2489, 2637, 2793, 2960, 3136, 3322, 3520, 3729, 3951};
   //           B   , C   , C#  , D   , D#  , E   , F   , F#  , G   , G#  , A   , A#  , B

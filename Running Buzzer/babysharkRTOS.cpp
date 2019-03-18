@@ -11,75 +11,75 @@
 #define GNOTE 3136
 #define FSNOTE 2960
 
-const TickType_t xTempo = TEMPO portTICK_PERIOD_MS;
-const TickType_t xHalf  = TEMPO/2;
-const TickType_t xQuarter = HALF/2;
-const TickType_t xThird = TEMPO/3;
-const TickType_t xEigth = QUARTER/2;
+const TickType_t xTempo = (TEMPO/portTICK_PERIOD_MS);
+const TickType_t xHalf  = ((TEMPO/2)/portTICK_PERIOD_MS);
+const TickType_t xQuarter = ((HALF/2)/portTICK_PERIOD_MS);
+const TickType_t xThird = ((TEMPO/3)/portTICK_PERIOD_MS);
+const TickType_t xEigth = ((QUARTER/2)/portTICK_PERIOD_MS);
 
 
 void babysharkdoo(){
   //D-E G GG  GG  GG
   tone(12,DNOTE); //D
-  vTaskDelay(xHALF);
+  vTaskDelay(xHalf);
   tone(12,ENOTE); //E
-  vTaskDelay(xHALF);
+  vTaskDelay(xHalf);
   noTone(12);
-  vTaskDelay(xQUARTER);
+  vTaskDelay(xQuarter);
 
   tone(12,GNOTE); //G
-  vTaskDelay(xEIGTH);
+  vTaskDelay(xEigth);
   noTone(12);
-  vTaskDelay(xHALF);
+  vTaskDelay(xHalf);
 
 
   tone(12,GNOTE); //G
-  vTaskDelay(xEIGTH);
+  vTaskDelay(xEigth);
   noTone(12);
-  vTaskDelay(xHALF);
+  vTaskDelay(xHalf);
   tone(12,GNOTE); //G
-  vTaskDelay(xEIGTH);
+  vTaskDelay(xEigth);
   noTone(12);
-  vTaskDelay(xTHIRD);
+  vTaskDelay(xThird);
   
   
   tone(12,GNOTE); //G
-  vTaskDelay(xEIGTH);
+  vTaskDelay(xEigth);
   noTone(12);
-  vTaskDelay(xQUARTER);
+  vTaskDelay(xQuarter);
   tone(12,GNOTE); //G
-  vTaskDelay(xQUARTER);
+  vTaskDelay(xQuarter);
   noTone(12);
-  vTaskDelay(xQUARTER);
+  vTaskDelay(xQuarter);
 
   
   tone(12,GNOTE); //G
-  vTaskDelay(xEIGTH);
+  vTaskDelay(xEigth);
   noTone(12);
-  vTaskDelay(xTHIRD);
+  vTaskDelay(xThird);
   tone(12,GNOTE); //G
-  vTaskDelay(xEIGTH);
+  vTaskDelay(xEigth);
   noTone(12);
-  vTaskDelay(xTHIRD);
+  vTaskDelay(xThird);
 
 }
 
 void babyshark(){
   tone(12,GNOTE); //G
-  vTaskDelay(xEIGTH);
+  vTaskDelay(xEigth);
   noTone(12);
-  vTaskDelay(xHALF); 
+  vTaskDelay(xHalf); 
   tone(12,GNOTE); //G
-  vTaskDelay(xEIGTH);
+  vTaskDelay(xEigth);
   noTone(12);
-  vTaskDelay(xHALF);
+  vTaskDelay(xHalf);
 
 
   tone(12,FSNOTE); //F#
-  vTaskDelay(xEIGTH);
+  vTaskDelay(xEigth);
   noTone(12);
-  vTaskDelay(xTEMPO);
-  vTaskDelay(xTEMPO);
+  vTaskDelay(xTempo);
+  vTaskDelay(xTempo);
 }
 
 void vTask1(void *p)
