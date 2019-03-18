@@ -1,11 +1,13 @@
-#define tempo 400
-#define halfnote (tempo/2)
-#define quarternote (halfnote/2)
-#define thirdnote (535/3)
-#define eigthnote (quarternote/2)
+#define TEMPO 400
+#define DNOTE 2349
+#define ENOTE 2637
+#define GNOTE 3136
+#define FSNOTE 2960
 
-int notes[12]={2093, 2217, 2349, 2489, 2637, 2793, 2960, 3136, 3322, 3520, 3729, 3951};
-  //             C7  , C#7 , D7  , D#7 , E7  , F7  , F#7 , G7  , G#7 , A7  , A#7 , B7
+int HALF = (TEMPO/2)
+int QUARTER = (HALF/2)
+int THIRD = (TEMPO/3)
+int EIGTH = (QUARTER/2)
 
 void setup() {
   pinMode(12,OUTPUT);
@@ -13,73 +15,73 @@ void setup() {
 
 void babysharkdoo(){
   //D-E G GG  GG  GG
-  tone(12,notes[2]); //D
-  delay(halfnote);
+  tone(12,DNOTE); //D
+  delay(HALF);
   
-  tone(12,notes[4]); //E
-  delay(halfnote);
+  tone(12,ENOTE); //E
+  delay(HALF);
   noTone(12);
-  delay(quarternote);
+  delay(QUARTER);
 
-  tone(12,notes[7]); //G
-  delay(eigthnote);
+  tone(12,GNOTE); //G
+  delay(EIGTH);
   noTone(12);
-  delay(halfnote);
-
-
-  tone(12,notes[7]); //G
-  delay(eigthnote);
-  noTone(12);
-  delay(halfnote);
-  
-  tone(12,notes[7]); //G
-  delay(eigthnote);
-  noTone(12);
-  delay(thirdnote);
+  delay(HALF);
 
 
-  
-  
-  tone(12,notes[7]); //G
-  delay(eigthnote);
+  tone(12,GNOTE); //G
+  delay(EIGTH);
   noTone(12);
-  delay(quarternote);
+  delay(HALF);
   
-  tone(12,notes[7]); //G
-  delay(quarternote);
+  tone(12,GNOTE); //G
+  delay(EIGTH);
   noTone(12);
-  delay(quarternote);
+  delay(THIRD);
 
 
   
   
-  tone(12,notes[7]); //G
-  delay(eigthnote);
+  tone(12,GNOTE); //G
+  delay(EIGTH);
   noTone(12);
-  delay(thirdnote);
+  delay(QUARTER);
+  
+  tone(12,GNOTE); //G
+  delay(QUARTER);
+  noTone(12);
+  delay(QUARTER);
 
-  tone(12,notes[7]); //G
-  delay(eigthnote);
+
+  
+  
+  tone(12,GNOTE); //G
+  delay(EIGTH);
   noTone(12);
-  delay(thirdnote);
+  delay(THIRD);
+
+  tone(12,GNOTE); //G
+  delay(EIGTH);
+  noTone(12);
+  delay(THIRD);
 
 }
 
 void babyshark(){
-  tone(12,notes[7]); //G
-  delay(eigthnote);
+  tone(12,GNOTE); //G
+  delay(EIGTH);
   noTone(12);
-  delay(halfnote);
+  delay(HALF);
   
-  tone(12,notes[7]); //G
-  delay(eigthnote);
+  tone(12,GNOTE); //G
+  delay(EIGTH);
   noTone(12);
-  delay(halfnote);
+  delay(HALF);
 
   
 
-  tone(12,notes[6]); //F#
-  delay(eigthnote);
+  tone(12,FSNOTE); //F#
+  delay(EIGTH);
   noTone(12);
   delay(tempo);
   delay(tempo);
@@ -87,9 +89,9 @@ void babyshark(){
 
 void loop() {
   babysharkdoo();
-  delay(quarternote);
+  delay(QUARTER);
   babysharkdoo();
-  delay(quarternote);
+  delay(QUARTER);
   babysharkdoo();
   babyshark();
 
