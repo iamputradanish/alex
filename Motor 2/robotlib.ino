@@ -15,8 +15,8 @@ typedef enum dir
 // Motor control pins
 #define A1   5
 #define A2   6
-#define B2   9
-#define B1   10
+#define B2   10
+#define B1   9
 
 // Ensure that percent is between 0 and 100
 double checkPercent(double percent)
