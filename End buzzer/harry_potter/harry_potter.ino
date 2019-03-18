@@ -1,61 +1,86 @@
-int buzzer_pin = 12;
+#define tempo 535
+#define halfnote (tempo/2)
+#define quarternote (halfnote/2)
+#define thirdnote (535/3)
+#define eigthnote (quarternote/2)
 
-struct MusicStruct {
-  int A = 550;
-  int As = 582;
-  int B = 617;
-  int C = 654;
-  int Cs = 693;
-  int D = 734;
-  int Ds = 777;
-  int E = 824;
-  int F = 873;
-  int Fs = 925;
-  int G = 980;
-  int Gs = 1003;
-  int A2 = 1100;
-  int A2s = 1165;
-  int B2o = 1234;
-  int C3 = 1308;
-  int C3s = 1385;
-  int D3 = 1555;
-}Music;
-
-struct LengthStruct {
-  float half = 0.5;
-  float one = 1.0;
-  float one_half = 1.5;
-  float two = 2.0;
-  float two_half = 2.5;
-}Length;
-
-int tempo = 400;
+int notes[13]={1976, 2093, 2217, 2349, 2489, 2637, 2793, 2960, 3136, 3322, 3520, 3729, 3951};
+  //           B   , C   , C#  , D   , D#  , E   , F   , F#  , G   , G#  , A   , A#  , B
+  //           0     1     2     3     4     5     6     7     8     9     10    11    12
 
 void setup() {
-  pinMode(buzzer_pin, OUTPUT);
+  pinMode(12,OUTPUT);
 }
 
-void setTone(int pin, int note, int duration) {
-  tone(pin, note, duration);
-  delay(duration);
-  noTone(pin);
+void theboywholived(){
+//
+//  B E G F# E B A F#
+//  E G F# Eb E B
+//  B E G F# E B D Db C
+//  Ab C B Bb F# G E
+//  G B G B G C B Bb
+//  F# G B Bb Bb B B
+//  G B G B G D Db C
+//  Ab C B Bb F# G E
+
+  //B E G F E B A F
+  noTone(12);
+  delay(tempo);
+  delay(tempo);
+  tone(12,notes[0]); //B
+  delay(tempo);
+  
+  
+  tone(12,notes[5]); //E
+  delay(tempo);
+  delay(halfnote);
+  tone(12,notes[8]); //G
+  delay(halfnote);
+  tone(12,notes[7]); //F#
+  delay(tempo);
+  
+  tone(12,notes[5]); //E
+  delay(tempo);
+  delay(tempo);
+  
+  tone(12,notes[12]); //B
+  delay(tempo);
+  
+  tone(12,notes[10]); //A
+  delay(tempo);
+  delay(tempo);
+  delay(tempo);
+
+  tone(12,notes[7]); //F#
+  delay(tempo);
+  delay(tempo);
+  noTone(12);
+  delay(tempo);
+  
+//  //E G F# Eb E B
+//
+//  tone(12,notes[4]); //E
+//  delay(tempo);
+//  delay(halfnote);
+//  tone(12,notes[8]); //G
+//  delay(halfnote);
+//  tone(12,notes[7]); //F#
+//  delay(tempo);
+//
+//  tone(12,notes[5]); //D#
+//  delay(tempo);
+//  delay(tempo);
+//  tone(12,notes[5]); //Eb/D#
+//  delay(tempo);
+//  tone(12,notes[12]); //B
+//  delay(tempo);
+//  delay(tempo);
+//  delay(tempo);
+//  noTone(12);
+  
 }
 
 void loop() {
-  setTone(buzzer_pin, Music.B, tempo * Length.one);
-  setTone(buzzer_pin, Music.E, tempo * Length.one_half);
-  setTone(buzzer_pin, Music.G, tempo * Length.half);
-  setTone(buzzer_pin, Music.F, tempo * Length.one);
-  setTone(buzzer_pin, Music.E, tempo * Length.two);
-  setTone(buzzer_pin, Music.B, tempo * Length.one);
-  setTone(buzzer_pin, Music.A2, tempo * Length.two_half);
-  setTone(buzzer_pin, Music.Fs, tempo * Length.two_half);
-  
-  setTone(buzzer_pin, Music.E, tempo * Length.one_half);
-  setTone(buzzer_pin, Music.G, tempo * Length.half);
-  setTone(buzzer_pin, Music.F, tempo * Length.one);
-  setTone(buzzer_pin, Music.Ds, tempo * Length.two);
-  setTone(buzzer_pin, Music.F, tempo * Length.one);
-  setTone(buzzer_pin, Music.B, tempo * Length.two_half);
-  delay(500000);
+  theboywholived();
+  delay(100000);
 }
