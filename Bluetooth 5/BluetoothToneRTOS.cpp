@@ -30,10 +30,10 @@ void bluetoothconnected(){
 
 }
 
-void vTask1(void *p)
+void vTask3(void *p)
 {
 	for (;;) {
-		bluetoothconnected;
+		bluetoothconnected();
 	}
 }
 
@@ -43,11 +43,11 @@ void setup()
 }
 
 void loop() {
-	xTaskCreate(vTask1, 			// Pointer to the task entry function
-				"BTBuzzer", // Task name
+	xTaskCreate(vTask3, 			// Pointer to the task entry function
+				"BTTone", // Task name
 				STACK_SIZE, 	// Stack size
 				NULL, 			// Pointer that will be used as parameter
-				1, 				// Task priority
+				3, 				// Task priority
 				NULL); 			// Used to pass back a handle by which the created task can be referenced.
 	vTaskStartScheduler();
 }
