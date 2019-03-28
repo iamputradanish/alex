@@ -13,10 +13,10 @@ typedef enum dir
 } dir;
 
 // Motor control pins
-#define A1   5
-#define A2   6
-#define B2   10
-#define B1   9
+#define A1   11
+#define A2   10
+#define B2   6
+#define B1   5
 
 // Ensure that percent is between 0 and 100
 double checkPercent(double percent)
@@ -143,7 +143,7 @@ void backward()
 }
 
 void left() {
-  move(75.0, 25.0, LEFT);
+  move(75.0, 0, LEFT);
 }
 
 void right() {
