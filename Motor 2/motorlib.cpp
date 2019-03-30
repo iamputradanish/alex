@@ -227,14 +227,10 @@ void moveByInstructionTask(void *p) {
 
 }
 
-void bluetoothEnqueueData(void *p) {
-	while (1) {
-		if (Serial.available()) {
-			// read potentiometer's value
-			char signal = Serial.read();
-			xQueueSendToBack(xQueue, &signal, portMAX_DELAY);
-			vTaskDelay(1);
-		}
+void SerialEvent() {
+	if (Serial.available()) {
+		char signal = Serial.read();
+		xQueueSendToBack(xQueue, &signal, portMAX_DELAY);
 	}
 }
 /*
@@ -276,8 +272,6 @@ void setup() {
 void loop() {
 	xTaskCreate(moveByInstructionTask, "moveByInstructionTask", STACK_SIZE,
 			NULL, 2, NULL);
-	xTaskCreate(bluetoothEnqueueData, "bluetoothTask", STACK_SIZE, NULL, 1,
-			NULL);
 	vTaskStartScheduler();
 }
 
