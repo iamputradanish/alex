@@ -5,7 +5,10 @@
 
 #define STACK_SIZE 200
 
-#define TEMPO 535
+#define BUZZER_PIN 12
+
+// #define TEMPO 535
+#define TEMPO 2140
 #define B6NOTE 1976
 #define B7NOTE 3951
 #define ENOTE 2637
@@ -15,11 +18,11 @@
 
 
 const TickType_t xTempo = (TEMPO/portTICK_PERIOD_MS);
-const TickType_t xHalf  = ((TEMPO/2)/portTICK_PERIOD_MS);
-const TickType_t xQuarter = ((HALF/2)/portTICK_PERIOD_MS);
-const TickType_t xEigth = ((QUARTER/2)/portTICK_PERIOD_MS);
+const TickType_t xHalf  = xTempo/2;
+const TickType_t xQuarter = xHalf/2;
+const TickType_t xEigth = xQuarter/2;
 
-TickType_t = xLastWakeTime;
+TickType_t xLastWakeTime;
 
 void theboywholived(){
 	xLastWakeTime = xTaskGetTickCount();
@@ -34,60 +37,60 @@ void theboywholived(){
 //  Ab C B Bb F# G E
 
   //B E G F E B A F
-  noTone(12);
+  noTone(BUZZER_PIN);
   vTaskDelayUntil(&xLastWakeTime, xTempo);
   vTaskDelayUntil(&xLastWakeTime, xTempo);
-  tone(12,B6NOTE); //B
+  tone(BUZZER_PIN,B6NOTE); //B
   vTaskDelayUntil(&xLastWakeTime, xTempo);
-  
-  
-  tone(12,ENOTE); //E
+
+
+  tone(BUZZER_PIN,ENOTE); //E
   vTaskDelayUntil(&xLastWakeTime, xTempo);
   vTaskDelayUntil(&xLastWakeTime, xHalf);
-  tone(12,GNOTE); //G
+  tone(BUZZER_PIN,GNOTE); //G
   vTaskDelayUntil(&xLastWakeTime, xHalf);
-  tone(12,FSNOTE); //F#
+  tone(BUZZER_PIN,FSNOTE); //F#
   vTaskDelayUntil(&xLastWakeTime, xTempo);
-  
-  tone(12,ENOTE); //E
+
+  tone(BUZZER_PIN,ENOTE); //E
   vTaskDelayUntil(&xLastWakeTime, xTempo);
   vTaskDelayUntil(&xLastWakeTime, xTempo);
-  
-  tone(12,B7NOTE); //B
+
+  tone(BUZZER_PIN,B7NOTE); //B
   vTaskDelayUntil(&xLastWakeTime, xTempo);
-  
-  tone(12,ANOTE); //A
+
+  tone(BUZZER_PIN,ANOTE); //A
   vTaskDelayUntil(&xLastWakeTime, xTempo);
   vTaskDelayUntil(&xLastWakeTime, xTempo);
   vTaskDelayUntil(&xLastWakeTime, xTempo);
 
-  tone(12,FSNOTE); //F#
+  tone(BUZZER_PIN,FSNOTE); //F#
   vTaskDelayUntil(&xLastWakeTime, xTempo);
   vTaskDelayUntil(&xLastWakeTime, xTempo);
-  noTone(12);
+  noTone(BUZZER_PIN);
   vTaskDelayUntil(&xLastWakeTime, xTempo);
-  
+
 //  //E G F# Eb E B
 //
-//  tone(12,ENOTE); //E
+//  tone(BUZZER_PIN,ENOTE); //E
 //  vTaskDelayUntil(&xLastWakeTime, xTempo);
 //  vTaskDelayUntil(&xLastWakeTime, XHalf);
-//  tone(12,GNOTE); //G
+//  tone(BUZZER_PIN,GNOTE); //G
 //  vTaskDelayUntil(&xLastWakeTime, xHalf);
-//  tone(12,FSNOTE); //F#
+//  tone(BUZZER_PIN,FSNOTE); //F#
 //  vTaskDelayUntil(&xLastWakeTime, xTempo);
 //
-//  tone(12,2489); //D#
+//  tone(BUZZER_PIN,2489); //D#
 //  vTaskDelayUntil(&xLastWakeTime, xTempo);
 //  vTaskDelayUntil(&xLastWakeTime, xTempo);
-//  tone(12,2489); //Eb/D#
+//  tone(BUZZER_PIN,2489); //Eb/D#
 //  vTaskDelayUntil(&xLastWakeTime, xTempo);
-//  tone(12,B7NOTE); //B
+//  tone(BUZZER_PIN,B7NOTE); //B
 //  vTaskDelayUntil(&xLastWakeTime, xTempo);
 //  vTaskDelayUntil(&xLastWakeTime, xTempo);
 //  vTaskDelayUntil(&xLastWakeTime, xTempo);
-//  noTone(12);
-  
+//  noTone(BUZZER_PIN);
+
 }
 
 void vTask2(void *p)
@@ -95,18 +98,18 @@ void vTask2(void *p)
 	for (;;) {
 		xLastWakeTime = xTaskGetTickCount();
 		theboywholived();
-		vTaskDelayUntil(&xLastWakeTime, 100000);
+		vTaskDelayUntil(&xLastWakeTime, 1000);
 	}
 }
 
-void setup() 
+void setup()
 {
-  pinMode(12,OUTPUT);
+  pinMode(BUZZER_PIN,OUTPUT);
 }
 
 void loop() {
-	xTaskCreate(vTask2, 			// Pointer to the task entry function
-				"EndBuzzer", // Task name
+	xTaskCreate(vTask2, 		// Pointer to the task entry function
+				"EndBuzzer", 	// Task name
 				STACK_SIZE, 	// Stack size
 				NULL, 			// Pointer that will be used as parameter
 				2, 				// Task priority
