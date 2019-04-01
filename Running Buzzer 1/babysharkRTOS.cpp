@@ -5,9 +5,10 @@
 
 #define STACK_SIZE 200
 
-#define BUZZER_PIN 13
+#define BUZZER_PIN 12
 
-#define TEMPO 400
+// #define TEMPO 400
+#define TEMPO 3200
 #define DNOTE 2349
 #define ENOTE 2637
 #define GNOTE 3136
