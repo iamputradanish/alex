@@ -5,6 +5,8 @@
 
 #define STACK_SIZE 200
 
+#define BUZZER_PIN 13
+
 #define TEMPO 400
 #define DNOTE 2349
 #define ENOTE 2637
@@ -12,93 +14,93 @@
 #define FSNOTE 2960
 
 const TickType_t xTempo = (TEMPO/portTICK_PERIOD_MS);
-const TickType_t xHalf  = ((TEMPO/2)/portTICK_PERIOD_MS);
-const TickType_t xQuarter = ((HALF/2)/portTICK_PERIOD_MS);
-const TickType_t xThird = ((TEMPO/3)/portTICK_PERIOD_MS);
-const TickType_t xEigth = ((QUARTER/2)/portTICK_PERIOD_MS);
+const TickType_t xHalf  = xTempo/2;
+const TickType_t xQuarter = xHalf/2;
+const TickType_t xThird = xTempo/3;
+const TickType_t xEigth = xQuarter/2;
 
-TickType_t = xLastWakeTime;
+TickType_t xLastWakeTime;
 
 void babysharkdoo(){
   xLastWakeTime = xTaskGetTickCount();
   //D-E G GG  GG  GG
-  tone(12,DNOTE); //D
+  tone(BUZZER_PIN,DNOTE); //D
   vTaskDelayUntil(&xLastWakeTime, xHalf);
-  tone(12,ENOTE); //E
+  tone(BUZZER_PIN,ENOTE); //E
   vTaskDelayUntil(&xLastWakeTime, xHalf);
-  noTone(12);
-  vTaskDelayUntil(&xLastWakeTime, xQuarter);
-  
-  tone(12,GNOTE); //G
-  vTaskDelayUntil(&xLastWakeTime, xEigth);
-  noTone(12);
-  vTaskDelayUntil(&xLastWakeTime, xHalf);
-
-  tone(12,GNOTE); //G
-  vTaskDelayUntil(&xLastWakeTime, xEigth);
-  noTone(12);
-  vTaskDelayUntil(&xLastWakeTime, xHalf);
-  tone(12,GNOTE); //G
-  vTaskDelayUntil(&xLastWakeTime, xEigth);
-  noTone(12);
-  vTaskDelayUntil(&xLastWakeTime, xThird);
-  
-  tone(12,GNOTE); //G
-  vTaskDelayUntil(&xLastWakeTime, xEigth);
-  noTone(12);
-  vTaskDelayUntil(&xLastWakeTime, xQuarter);
-  tone(12,GNOTE); //G
-  vTaskDelayUntil(&xLastWakeTime, xQuarter);
-  noTone(12);
+  noTone(BUZZER_PIN);
   vTaskDelayUntil(&xLastWakeTime, xQuarter);
 
-  tone(12,GNOTE); //G
+  tone(BUZZER_PIN,GNOTE); //G
   vTaskDelayUntil(&xLastWakeTime, xEigth);
-  noTone(12);
+  noTone(BUZZER_PIN);
+  vTaskDelayUntil(&xLastWakeTime, xHalf);
+
+  tone(BUZZER_PIN,GNOTE); //G
+  vTaskDelayUntil(&xLastWakeTime, xEigth);
+  noTone(BUZZER_PIN);
+  vTaskDelayUntil(&xLastWakeTime, xHalf);
+  tone(BUZZER_PIN,GNOTE); //G
+  vTaskDelayUntil(&xLastWakeTime, xEigth);
+  noTone(BUZZER_PIN);
   vTaskDelayUntil(&xLastWakeTime, xThird);
-  tone(12,GNOTE); //G
+
+  tone(BUZZER_PIN,GNOTE); //G
   vTaskDelayUntil(&xLastWakeTime, xEigth);
-  noTone(12);
+  noTone(BUZZER_PIN);
+  vTaskDelayUntil(&xLastWakeTime, xQuarter);
+  tone(BUZZER_PIN,GNOTE); //G
+  vTaskDelayUntil(&xLastWakeTime, xQuarter);
+  noTone(BUZZER_PIN);
+  vTaskDelayUntil(&xLastWakeTime, xQuarter);
+
+  tone(BUZZER_PIN,GNOTE); //G
+  vTaskDelayUntil(&xLastWakeTime, xEigth);
+  noTone(BUZZER_PIN);
+  vTaskDelayUntil(&xLastWakeTime, xThird);
+  tone(BUZZER_PIN,GNOTE); //G
+  vTaskDelayUntil(&xLastWakeTime, xEigth);
+  noTone(BUZZER_PIN);
   vTaskDelayUntil(&xLastWakeTime, xThird);
 
 }
 
 void babyshark(){
   xLastWakeTime = xTaskGetTickCount();
-  
-  tone(12,GNOTE); //G
+
+  tone(BUZZER_PIN,GNOTE); //G
   vTaskDelayUntil(&xLastWakeTime, xEigth);
-  noTone(12);
-  vTaskDelayUntil(&xLastWakeTime, xHalf); 
-  tone(12,GNOTE); //G
-  vTaskDelayUntil(&xLastWakeTime, xEigth);
-  noTone(12);
+  noTone(BUZZER_PIN);
   vTaskDelayUntil(&xLastWakeTime, xHalf);
-  
-  tone(12,FSNOTE); //F#
+  tone(BUZZER_PIN,GNOTE); //G
   vTaskDelayUntil(&xLastWakeTime, xEigth);
-  noTone(12);
+  noTone(BUZZER_PIN);
+  vTaskDelayUntil(&xLastWakeTime, xHalf);
+
+  tone(BUZZER_PIN,FSNOTE); //F#
+  vTaskDelayUntil(&xLastWakeTime, xEigth);
+  noTone(BUZZER_PIN);
   vTaskDelayUntil(&xLastWakeTime, xTempo);
   vTaskDelayUntil(&xLastWakeTime, xTempo);
 }
 
 void vTask1(void *p)
 {
-	
+
 	for (;;) {
 		xLastWakeTime = xTaskGetTickCount();
 		babysharkdoo();
-		vTaskDelayUntil(&xLastWakeTime, xQUARTER);
+		vTaskDelayUntil(&xLastWakeTime, xQuarter);
 		babysharkdoo();
-		vTaskDelayUntil(&xLastWakeTime, xQUARTER);
+		vTaskDelayUntil(&xLastWakeTime, xQuarter);
 		babysharkdoo();
 		babyshark();
 	}
 }
 
-void setup() 
+void setup()
 {
-  pinMode(12,OUTPUT);
+  pinMode(BUZZER_PIN,OUTPUT);
 }
 
 void loop() {
