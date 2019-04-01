@@ -5,7 +5,11 @@
 
 #define STACK_SIZE 200
 
-#define TEMPO 400
+#define BUZZER_PIN 12
+
+//#define TEMPO 400
+#define TEMPO 3200
+
 #define CNOTE 2093
 #define DNOTE 2349
 #define ENOTE 2637
@@ -15,31 +19,30 @@
 const TickType_t xTempo = (TEMPO/portTICK_PERIOD_MS);
 const TickType_t xHalf  = ((TEMPO/2)/portTICK_PERIOD_MS);
 
-TickType_t = xLastWakeTime;
+TickType_t xLastWakeTime;
 
 void bluetoothconnected(){
   xLastWakeTime = xTaskGetTickCount();
   //C D E
-  tone(12,CNOTE); //C
+  tone(BUZZER_PIN, CNOTE); //C
   vTaskDelayUntil(&xLastWakeTime, xHalf);
-  tone(12,DNOTE); //D
+  tone(BUZZER_PIN, DNOTE); //D
   vTaskDelayUntil(&xLastWakeTime, xHalf);
-  tone(12,ENOTE); //E
+  tone(BUZZER_PIN, ENOTE); //E
   vTaskDelayUntil(&xLastWakeTime, xHalf);
-  noTone(12);
+  noTone(BUZZER_PIN);
 
 }
 
 void vTask3(void *p)
 {
-	for (;;) {
-		bluetoothconnected();
-	}
+	bluetoothconnected();
+	vTaskSuspend(NULL);
 }
 
 void setup() 
 {
-  pinMode(12,OUTPUT);
+  pinMode(BUZZER_PIN, OUTPUT);
 }
 
 void loop() {
