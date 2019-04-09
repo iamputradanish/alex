@@ -357,22 +357,22 @@ void motorTask(void *p) {
 			move(-100.0, -100.0);
 			break;
 		case LEFT:
-			move(-50.0, 50.0);
+			move(-75.0, 75.0);
 			break;
 		case RIGHT:
-			move(50.0, -50.0);
+			move(75.0, -75.0);
 			break;
 		case LEFT_FORWARD:
-			move(12.5, 100.0);
+			move(0, 100.0);
 			break;
 		case RIGHT_FORWARD:
-			move(100.0, 12.5);
+			move(100.0, 0);
 			break;
 		case LEFT_BACKWARD:
-			move(-12.5, -100.0);
+			move(0, -100.0);
 			break;
 		case RIGHT_BACKWARD:
-			move(-100.0, -12.5);
+			move(-100.0, -0);
 			break;
 		case STOP:
 		default:
