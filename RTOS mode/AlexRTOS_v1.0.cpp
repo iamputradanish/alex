@@ -11,7 +11,7 @@
 #define QUEUE_SIZE 10
 
 // Task constants
-#define BLUETOOTHTASK_PERIOD 40
+#define BLUETOOTHTASK_PERIOD 25
 #define GREENLEDBLUETOOTH_DELAY 250
 #define GREENLEDMOVING_DELAY 100
 #define REDLEDSTATIONARY_DELAY 250
@@ -357,10 +357,10 @@ void motorTask(void *p) {
 			move(-100.0, -100.0);
 			break;
 		case LEFT:
-			move(-100.0, 100.0);
+			move(-50.0, 50.0);
 			break;
 		case RIGHT:
-			move(100.0, -100.0);
+			move(50.0, -50.0);
 			break;
 		case LEFT_FORWARD:
 			move(12.5, 100.0);
@@ -483,6 +483,8 @@ void redLedTask(void *p) {
 // Buzzer tasks controller
 void buzzerTask(void *p) {
 	signed char data = STOP;
+	bool isBabySharkOn = false;
+	bool isEndMusicOn = false;
 	noTone(BUZZER_PIN);
 	// BlueTooth Tone
 	while (data != BLUETOOTH_CONNECTED) {
@@ -499,13 +501,25 @@ void buzzerTask(void *p) {
 		switch (data) {
 		case BEGIN_CHALLENGE:
 			noTone(BUZZER_PIN);
+			isEndMusicOn = false;
 			vTaskSuspend(th_endmusic);
-			vTaskResume(th_babyshark);
+			if (isBabySharkOn == true) {
+				vTaskSuspend(th_babyshark);
+			} else {
+				vTaskResume(th_babyshark);
+			}
+			isBabySharkOn = !isBabySharkOn;
 			break;
 		case END_CHALLENGE:
 			noTone(BUZZER_PIN);
+			isBabySharkOn = false;
 			vTaskSuspend(th_babyshark);
-			vTaskResume(th_endmusic);
+			if (isEndMusicOn == true) {
+				vTaskSuspend(th_endmusic);
+			} else {
+				vTaskResume(th_endmusic);
+			}
+			isEndMusicOn = !isEndMusicOn;
 			break;
 		}
 	}
@@ -560,9 +574,9 @@ void setup() {
 void loop() {
 	xTaskCreate(blueToothTask, "BlueToothTask", STACK_SIZE, NULL, 6, NULL);
 	xTaskCreate(motorTask, "Motor", STACK_SIZE, NULL, 5, NULL);
-	xTaskCreate(greenLedTask, "GreenLed", STACK_SIZE, NULL, 4, NULL);
+	xTaskCreate(buzzerTask, "Buzzer", STACK_SIZE, NULL, 4, NULL);
+	xTaskCreate(greenLedTask, "GreenLed", STACK_SIZE, NULL, 3, NULL);
 	xTaskCreate(redLedTask, "RedLed", STACK_SIZE, NULL, 2, NULL);
-	xTaskCreate(buzzerTask, "Buzzer", STACK_SIZE, NULL, 3, NULL);
 	xTaskCreate(babySharkMusicTask, "RunningBuzzer", STACK_SIZE, NULL, 1, &th_babyshark);
 	xTaskCreate(endChallengeMusicTask, "EndBuzzer", STACK_SIZE, NULL, 1, &th_endmusic);
 
