@@ -425,7 +425,33 @@ void greenLedTask(void *p) {
 			} else {
 				ledToLight = 14 - i;	// backward running led
 			}
-			output = 1 << ledToLight;
+			// output = 0x01 << ledToLight;
+			switch (ledToLight) {
+			case 0:
+				output = 0x01;
+				break;
+			case 1:
+				output = 0x02;
+				break;
+			case 2:
+				output = 0x04;
+				break;
+			case 3:
+				output = 0x08;
+				break;
+			case 4:
+				output = 0x10;
+				break;
+			case 5:
+				output = 0x20;
+				break;
+			case 6:
+				output = 0x40;
+				break;
+			case 7:
+				output = 0x80;
+				break;
+			}
 		} else {
 			output = GREEN_LED_ALL_HIGH;
 		}
