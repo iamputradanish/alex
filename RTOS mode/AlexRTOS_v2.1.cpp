@@ -334,7 +334,7 @@ void blueToothTask(void *p) {
 				xQueueSendToBack(q_buzzerdata, &signal, 0);
 				break;
 			case STOP:
-				motor_data = 0x00;
+				motor_data = 0x0000;
 				xQueueReceive(q_motordata, &temp, 0);
 				xQueueSendToBack(q_motordata, &motor_data, 0);
 				xQueueReceive(q_greenleddata, &temp, 0);
@@ -357,7 +357,7 @@ void blueToothTask(void *p) {
 					if (Serial.available()) {
 						signed char y = Serial.read();
 						motor_data = convert_8_bit_into_16_bit(x, y);
-						if (motor_data == 0x00) {
+						if (motor_data == 0x0000) {
 							signal = STOP;
 						}
 						xQueueReceive(q_motordata, &temp, 0);
@@ -378,6 +378,7 @@ void blueToothTask(void *p) {
 /***** Motor Task *****/
 void motorTask(void *p) {
 	int data = 0x00;
+	double d = 0;
 	signed char x, y;
 	double l = 0;
 	double r = 0;
@@ -389,19 +390,27 @@ void motorTask(void *p) {
 		if (y == 0) {
 			l = x;
 			r = (-1) * x;
-		} else if (x >= 0) {
-			l = y;
-			if (y > 0) {
-				r = (((double) (y - x)) / (y + x)) * y;
-			} else if (y < 0) {
-				r = (((double) (y + x)) / (y - x)) * y;
+		} else {
+			d = sqrt(x * x + y * y);
+			if (d > 100) {
+				d = 100;
 			}
-		} else if (x < 0) {
-			r = y;
-			if (y > 0) {
-				l = (((double) (y + x)) / (y - x)) * y;
-			} else if (y < 0) {
-				l = (((double) (y - x)) / (y + x)) * y;
+			if (x >= 0) {
+				if (y > 0) {
+					l = d;
+					r = (((double) (y - x)) / (y + x)) * l;
+				} else if (y < 0) {
+					l = (-1) * d;
+					r = (((double) (y + x)) / (y - x)) * l;
+				}
+			} else if (x < 0) {
+				if (y > 0) {
+					r = d;
+					l = (((double) (y + x)) / (y - x)) * r;
+				} else if (y < 0) {
+					r = (-1) * d;
+					l = (((double) (y - x)) / (y + x)) * r;
+				}
 			}
 		}
 		move(l, r);
@@ -444,6 +453,8 @@ void greenLedTask(void *p) {
 			} else {
 				ledToLight = 14 - i;	// backward running led
 			}
+			output = 1 << ledToLight;
+		} else {
 			// output = 0x01 << ledToLight;
 			switch (ledToLight) {
 			case 0:
@@ -471,8 +482,6 @@ void greenLedTask(void *p) {
 				output = 0x80;
 				break;
 			}
-		} else {
-			output = GREEN_LED_ALL_HIGH;
 		}
 		i++;
 		if (i >= 14) {
